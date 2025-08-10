@@ -48,8 +48,12 @@ struct ColorSettingView: View {
     
     var body: some View {
         HStack(spacing: 16) {
-            Text(lround(value).formatted()).frame(width: 35)
-            Slider(value: $value, in: 0...255, step: 1).tint(colorSlider)
+            Text(lround(value).formatted())
+                .frame(width: 35, alignment: .leading)
+                .foregroundStyle(.white)
+            Slider(value: $value, in: 0...255, step: 1)
+                .tint(colorSlider)
+                .animation(.easeInOut(duration: 0.3), value: value)
         }
         .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
     }
