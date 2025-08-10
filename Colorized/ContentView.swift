@@ -14,20 +14,47 @@ struct ContentView: View {
     @State private var blueValue = Double.random(in: 0...255)
     
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
         ZStack {
             Color(#colorLiteral(red: 0, green: 0.2921561163, blue: 0.6085549857, alpha: 1)).ignoresSafeArea()
+            
+            VStack {
+                ColorDisplayView(
+                    redValue: redValue,
+                    greenValue: greenValue,
+                    blueValue: blueValue
+                )
+                
                 Spacer()
             }
         }
-        .padding()
     }
 }
 
 #Preview {
     ContentView()
+}
+struct ColorDisplayView: View {
+    
+    let redValue: Double
+    let greenValue: Double
+    let blueValue: Double
+    
+    var body: some View {
+        RoundedRectangle(cornerRadius: 20)
+            .fill(
+                Color(
+                    red: redValue/255,
+                    green: greenValue/255,
+                    blue: blueValue/255
+                )
+            )
+            .frame(height: 150)
+            .overlay {
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(.white, lineWidth: 4)
+            }
+            .padding(
+                EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16)
+            )
+    }
 }
