@@ -24,6 +24,12 @@ struct ContentView: View {
                     blueValue: blueValue
                 )
                 
+                VStack {
+                    ColorSliderView(colorSlider: .red, value: $redValue)
+                    ColorSliderView(colorSlider: .green, value: $greenValue)
+                    ColorSliderView(colorSlider: .blue, value: $blueValue)
+                }
+                
                 Spacer()
             }
         }
@@ -33,6 +39,22 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
+
+struct ColorSliderView: View {
+    
+    let colorSlider: Color
+    
+    @Binding var value: Double
+    
+    var body: some View {
+        HStack(spacing: 16) {
+            Text(lround(value).formatted()).frame(width: 35)
+            Slider(value: $value, in: 0...255, step: 1).tint(colorSlider)
+        }
+        .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+    }
+}
+
 struct ColorDisplayView: View {
     
     let redValue: Double
