@@ -40,7 +40,7 @@ struct ContentView: View {
     ContentView()
 }
 
-struct ColorSliderView: View {
+struct ColorSettingView: View {
     
     let colorSlider: Color
     
