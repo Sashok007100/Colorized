@@ -44,6 +44,9 @@ struct ColorSettingView: View {
     
     let colorSlider: Color
     
+    @State private var tempValue: Double = 0
+    @FocusState private var isEditing: Bool
+    
     @Binding var value: Double
     
     var body: some View {
@@ -54,6 +57,27 @@ struct ColorSettingView: View {
             Slider(value: $value, in: 0...255, step: 1)
                 .tint(colorSlider)
                 .animation(.easeInOut(duration: 0.3), value: value)
+            TextField("", value: $tempValue, format: .number.precision(.fractionLength(0)))
+                .frame(width: 50)
+                .keyboardType(.decimalPad)
+                .textFieldStyle(.roundedBorder)
+                .colorScheme(.light)
+                .focused($isEditing)
+                .onAppear {
+                    tempValue = value
+                }
+                .onChange(of: isEditing) { oldValue, newValue in
+                    if newValue {
+                        tempValue = value
+                    } else {
+                        value = tempValue
+                    }
+                }
+                .onChange(of: value) { _, newValue in
+                    if !isEditing {
+                        tempValue = newValue
+                    }
+                }
         }
         .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
     }
