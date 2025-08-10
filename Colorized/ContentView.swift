@@ -19,6 +19,10 @@ struct ContentView: View {
                 .imageScale(.large)
                 .foregroundStyle(.tint)
             Text("Hello, world!")
+        ZStack {
+            Color(#colorLiteral(red: 0, green: 0.2921561163, blue: 0.6085549857, alpha: 1)).ignoresSafeArea()
+                Spacer()
+            }
         }
         .padding()
     }
