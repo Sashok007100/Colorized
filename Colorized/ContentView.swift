@@ -82,7 +82,7 @@ struct ColorSettingView: View {
                 .animation(.easeInOut(duration: 0.3), value: value)
             TextField("", value: $tempValue, format: .number.precision(.fractionLength(0)))
                 .frame(width: 50)
-                .keyboardType(.decimalPad)
+                .keyboardType(.numberPad)
                 .textFieldStyle(.roundedBorder)
                 .colorScheme(.light)
                 .focused($isEditing)
