@@ -25,14 +25,37 @@ struct ContentView: View {
                 )
                 
                 VStack {
-                    ColorSliderView(colorSlider: .red, value: $redValue)
-                    ColorSliderView(colorSlider: .green, value: $greenValue)
-                    ColorSliderView(colorSlider: .blue, value: $blueValue)
+                    ColorSettingView(colorSlider: .red, value: $redValue)
+                    ColorSettingView(colorSlider: .green, value: $greenValue)
+                    ColorSettingView(colorSlider: .blue, value: $blueValue)
+                }
+                .toolbar{
+                    ToolbarItemGroup(placement: .keyboard) {
+                        Spacer()
+                        Button("Done") {
+                            endEditing()
+                        }
+                    }
                 }
                 
                 Spacer()
             }
         }
+        .onTapGesture {
+            endEditing()
+        }
+    }
+}
+
+extension View {
+    func endEditing() {
+        UIApplication.shared.sendAction(
+            #selector(UIResponder.resignFirstResponder),
+            to: nil,
+            from: nil,
+            for: nil
+        )
+        
     }
 }
 
